@@ -71,5 +71,53 @@ gg_base +
 
 gg_base + 
   geom_col(aes(fill = visitors))
-```
 
+
+gg_base +
+  geom_point(
+    aes(size = visitors,
+        color = visitors),
+    alpha = 0.5
+  ) +
+  theme_minimal()
+
+gg_base +
+  geom_line(linetype = "dotted") +
+  theme_bw() +
+  labs(
+    x = "Year",
+    y = "Annual park visitors",
+    title = "Channel Islands NP Visitation",
+    subtitle = "(1963 - 2016)"
+    #legend = "test" 
+)
+
+
+
+gg_base +
+  geom_line(color = "purple") +
+  geom_point(color = "orange",
+             aes(size = year),
+             alpha = 0.5)
+
+```
+``` {r multi-series}
+#adding 'group' allows to plot multiple series. in this specific case park_name is the name of a column
+head(ca_np)
+ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name)) +
+  geom_line()
+
+
+gg_np <- ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name))
+
+
+gg_np +
+  geom_line(show.legend = FALSE) +
+  theme_light() + 
+  labs(x = "year", y = "annual visitors") +
+  facet_wrap(~ park_name)
+
+
+ggsave(here("figures", "np_graph.jpg"), dpi = 180, width = 8, height = 7)
+
+```
