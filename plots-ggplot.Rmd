@@ -7,3 +7,5 @@ output: html_document
 # Plots with ggplot2
 
 We are going to make plots in R and it's going to be amazing.
+
+"We use the following data from the Santa Barbara Coastal Term Ecological Research and National  Oceanic and Atmospheric Administration in our analyses"
