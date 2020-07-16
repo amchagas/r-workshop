@@ -9,3 +9,67 @@ output: html_document
 We are going to make plots in R and it's going to be amazing.
 
 "We use the following data from the Santa Barbara Coastal Term Ecological Research and National  Oceanic and Atmospheric Administration in our analyses"
+
+```{r attach-libraries}
+library(tidyverse)
+
+library(readxl)
+
+library(here)
+```
+
+
+```{r open-csv}
+
+ca_np<-read.csv(here("data","ca_np.csv"))
+
+head(ca_np)
+summary(ca_np)
+
+
+```
+
+
+```{r open-excel}
+
+ci_np <- read_excel(here("data", "ci_np.xlsx"))
+
+
+```
+
+
+```{r ggplot2}
+
+ggplot(data = ci_np, aes(x = year, y = visitors)) +  geom_line()
+
+
+gg_base<-ggplot(data = ci_np, aes(x = year, y = visitors)) 
+#this above is indeed quite nice. you store in a variable just the data, 
+#x and y information and then "map it" to a plot type (see below)
+
+gg_base+geom_point()
+
+gg_base+geom_col()
+
+
+gg_base +
+  geom_line(
+    color = "purple",
+    linetype = "dashed"
+  )
+
+```
+
+``` {r conditional-plot}
+
+gg_base + 
+  geom_point(
+    aes(size = visitors,
+        color = visitors),
+    alpha = 0.5
+  )
+
+gg_base + 
+  geom_col(aes(fill = visitors))
+```
+
